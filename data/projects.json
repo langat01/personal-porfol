@@ -1,0 +1,77 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Healthcare Predictive Analytics",
+      "icon": "fas fa-heartbeat",
+      "overview": "This project involved developing a machine learning model to predict patient readmission risks within 30 days of discharge. The model helps hospitals identify high-risk patients and allocate resources more effectively, ultimately reducing readmission rates and healthcare costs.",
+      "description": "ML model predicting patient readmission risks with 92% accuracy, helping hospitals reduce costs and improve care through data-driven interventions.",
+      "technologies": ["Python", "Scikit-learn", "TensorFlow", "Tableau", "SQL", "Pandas", "NumPy"],
+      "features": [
+        "98% accuracy in predicting patient readmission risks",
+        "Integration with hospital EHR systems",
+        "Real-time risk scoring dashboard",
+        "Explainable AI features for clinician trust",
+        "Automated retraining pipeline"
+      ],
+      "github": "https://github.com/weldonlangat/healthcare-analytics",
+      "reportSummary": "The healthcare predictive analytics project successfully reduced readmission rates by 18% at pilot hospitals, resulting in estimated annual savings of $2.3M. The model achieved 98% accuracy with a precision-recall AUC of 0.96.",
+      "metrics": [
+        "Model Accuracy: 98%",
+        "Precision-Recall AUC: 0.96",
+        "Reduction in Readmission Rates: 18%",
+        "Cost Savings: $2.3M annually",
+        "Processing Time: < 5 seconds per prediction"
+      ],
+      "impact": "The implementation of this predictive model allowed hospitals to proactively manage high-risk patients, reducing emergency readmissions and improving patient outcomes. The dashboard provided clinicians with actionable insights that improved patient care coordination.",
+      "challenges": [
+        "Data privacy and HIPAA compliance requirements",
+        "Imbalanced dataset with only 8% readmission cases",
+        "Integration with legacy hospital systems",
+        "Ensuring model interpretability for medical staff"
+      ],
+      "codePreview": "# Healthcare Predictive Analytics Model\nimport pandas as pd\nimport numpy as np\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.ensemble import RandomForestClassifier\nfrom sklearn.metrics import accuracy_score, classification_report\n\n# Load and preprocess healthcare data\ndef load_healthcare_data(filepath):\n    df = pd.read_csv(filepath)\n    # Data preprocessing steps here\n    return df\n\n# Train predictive model\ndef train_readmission_model(X, y):\n    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n    model = RandomForestClassifier(n_estimators=100, random_state=42)\n    model.fit(X_train, y_train)\n    \n    # Evaluate model\n    y_pred = model.predict(X_test)\n    accuracy = accuracy_score(y_test, y_pred)\n    print(f'Model Accuracy: {accuracy:.2%}')\n    \n    return model, accuracy",
+      "liveDemo": "https://healthcare-demo.weldonlangat.com",
+      "demoVideo": "https://youtube.com/watch?v=healthcare-demo",
+      "demoNotebook": "https://colab.research.google.com/drive/healthcare-notebook"
+    },
+    {
+      "id": 2,
+      "title": "E-commerce Recommendation System",
+      "icon": "fas fa-shopping-cart",
+      "overview": "A personalized product recommendation engine built using collaborative filtering and deep learning techniques. The system analyzes user behavior, purchase history, and product attributes to deliver personalized recommendations that increase engagement and sales.",
+      "description": "Personalized product recommender using collaborative filtering that increased sales by 25% for online retailer through improved customer engagement.",
+      "technologies": ["Python", "PySpark", "Apache Kafka", "AWS", "Docker", "TensorFlow", "FastAPI"],
+      "features": [
+        "Real-time recommendation engine with < 100ms latency",
+        "Hybrid approach combining collaborative and content-based filtering",
+        "A/B testing framework for algorithm evaluation",
+        "Scalable architecture handling 1M+ daily users",
+        "Personalized ranking based on user preferences"
+      ],
+      "github": "https://github.com/weldonlangat/recommendation-system",
+      "reportSummary": "The recommendation system increased average order value by 15% and conversion rates by 25% for the e-commerce platform. User engagement metrics showed a 40% increase in time spent on site and a 30% reduction in bounce rate.",
+      "metrics": [
+        "Conversion Rate Increase: 25%",
+        "Average Order Value Increase: 15%",
+        "Click-Through Rate: 8.5%",
+        "Latency: < 100ms",
+        "User Engagement Increase: 40%"
+      ],
+      "impact": "The recommendation engine transformed the shopping experience, leading to significant revenue growth and improved customer satisfaction. The system now serves over 1 million daily active users with personalized product suggestions.",
+      "challenges": [
+        "Cold start problem for new users and products",
+        "Scalability to handle peak traffic during sales events",
+        "Real-time processing of user interaction data",
+        "Balancing exploration vs exploitation in recommendations"
+      ],
+      "codePreview": "# Recommendation System using Collaborative Filtering\nimport pandas as pd\nimport numpy as np\nfrom sklearn.metrics.pairwise import cosine_similarity\n\nclass RecommendationEngine:\n    def __init__(self):\n        self.user_item_matrix = None\n        self.similarity_matrix = None\n    \n    def create_user_item_matrix(self, interactions_df):\n        # Create user-item interaction matrix\n        self.user_item_matrix = pd.pivot_table(\n            interactions_df,\n            values='rating',\n            index='user_id',\n            columns='product_id',\n            fill_value=0\n        )\n    \n    def calculate_similarity(self):\n        # Calculate cosine similarity between users\n        self.similarity_matrix = cosine_similarity(self.user_item_matrix)\n    \n    def recommend_products(self, user_id, n_recommendations=5):\n        # Generate recommendations for a user\n        user_index = self.user_item_matrix.index.get_loc(user_id)\n        similar_users = np.argsort(self.similarity_matrix[user_index])[::-1][1:6]\n        \n        # Aggregate products from similar users\n        recommendations = []\n        for similar_user in similar_users:\n            user_products = self.user_item_matrix.iloc[similar_user]\n            top_products = user_products.nlargest(3).index.tolist()\n            recommendations.extend(top_products)\n        \n        return list(set(recommendations))[:n_recommendations]",
+      "liveDemo": "https://recommendations-demo.weldonlangat.com",
+      "demoVideo": "https://youtube.com/watch?v=recommendations-demo",
+      "demoNotebook": "https://colab.research.google.com/drive/recommendations-notebook"
+    },
+    {
+      "id": 3,
+      "title": "Financial Fraud Detection System",
+      "icon": "fas fa-chart-bar",
+      "overview": "A real-time fraud detection system that uses machine learning to identify fraudulent transactions in banking systems. The model analyzes transaction patterns, user behavior, and contextual data
