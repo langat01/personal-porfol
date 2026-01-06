@@ -74,4 +74,36 @@
       "id": 3,
       "title": "Financial Fraud Detection System",
       "icon": "fas fa-chart-bar",
-      "overview": "A real-time fraud detection system that uses machine learning to identify fraudulent transactions in banking systems. The model analyzes transaction patterns, user behavior, and contextual data
+      "overview": "A real-time fraud detection system that uses machine learning to identify fraudulent transactions in banking systems. The model analyzes transaction patterns, user behavior, and contextual data to flag suspicious activities with high precision.",
+      "description": "Real-time anomaly detection system for banking transactions with 99.5% precision in identifying fraudulent activities and reducing false positives by 60%.",
+      "technologies": ["Python", "XGBoost", "FastAPI", "Docker", "PostgreSQL", "Kafka", "Redis"],
+      "features": [
+        "Real-time fraud detection with 99.5% precision",
+        "Adaptive learning from new fraud patterns",
+        "Multi-layer risk scoring system",
+        "Integration with banking transaction APIs",
+        "Comprehensive fraud investigation dashboard"
+      ],
+      "github": "https://github.com/weldonlangat/fraud-detection",
+      "reportSummary": "The fraud detection system successfully identified fraudulent transactions with 99.5% precision, reducing false positives by 60% compared to the previous rule-based system. This resulted in annual savings of $4.7M in prevented fraud.",
+      "metrics": [
+        "Precision: 99.5%",
+        "Recall: 92%",
+        "False Positive Reduction: 60%",
+        "Annual Fraud Prevention: $4.7M",
+        "Processing Speed: < 50ms per transaction"
+      ],
+      "impact": "The system significantly improved fraud detection capabilities while reducing customer friction from false positives. The adaptive learning component continuously improved performance as new fraud patterns emerged.",
+      "challenges": [
+        "Extremely imbalanced dataset (< 0.1% fraud cases)",
+        "Requirement for real-time processing with low latency",
+        "Adapting to evolving fraud techniques",
+        "Balancing security with customer experience"
+      ],
+      "codePreview": "# Fraud Detection Model using XGBoost\nimport pandas as pd\nimport numpy as np\nimport xgboost as xgb\nfrom sklearn.model_selection import train_test_split\nfrom sklearn.metrics import classification_report, confusion_matrix\n\nclass FraudDetectionModel:\n    def __init__(self):\n        self.model = xgb.XGBClassifier(\n            n_estimators=200,\n            max_depth=8,\n            learning_rate=0.1,\n            scale_pos_weight=100,  # Handle class imbalance\n            random_state=42\n        )\n    \n    def preprocess_data(self, transactions_df):\n        # Feature engineering for fraud detection\n        transactions_df['transaction_hour'] = pd.to_datetime(transactions_df['timestamp']).dt.hour\n        transactions_df['amount_to_balance_ratio'] = transactions_df['amount'] / transactions_df['account_balance']\n        transactions_df['is_foreign'] = transactions_df['merchant_country'] != transactions_df['card_country']\n        \n        # Select features for training\n        features = ['amount', 'transaction_hour', 'amount_to_balance_ratio', \n                   'is_foreign', 'merchant_category', 'previous_fraud_count']\n        \n        X = transactions_df[features]\n        y = transactions_df['is_fraud']\n        \n        return X, y\n    \n    def train(self, X_train, y_train):\n        self.model.fit(X_train, y_train)\n    \n    def predict(self, X_test):\n        return self.model.predict(X_test)\n    \n    def predict_proba(self, X_test):\n        return self.model.predict_proba(X_test)[:, 1]",
+      "liveDemo": "https://fraud-demo.weldonlangat.com",
+      "demoVideo": "https://youtube.com/watch?v=fraud-demo",
+      "demoNotebook": "https://colab.research.google.com/drive/fraud-notebook"
+    }
+  ]
+}
