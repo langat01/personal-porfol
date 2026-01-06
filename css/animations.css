@@ -1,0 +1,94 @@
+/* Animations */
+@keyframes runText {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes projectCardEntrance {
+    0% {
+        transform: scale(0.95) translateY(30px);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Scroll animations */
+.fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.education-card {
+    transform: translateY(50px);
+    opacity: 0;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.education-card.visible {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.project-card {
+    transform: scale(0.95);
+    opacity: 0;
+    animation: projectCardEntrance 0.6s ease forwards;
+}
+
+.project-card.visible {
+    transform: scale(1);
+    opacity: 1;
+}
+
+.cert-modal.active .cert-modal-content {
+    transform: translateY(0);
+}
+
+.project-modal.active .project-modal-content {
+    transform: translateY(0);
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.5s ease;
+}
