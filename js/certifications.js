@@ -1,7 +1,7 @@
-// Fallback certifications data (use this for testing)
+// Fallback certifications data
 const fallbackCertifications = {
     "certifications": [
-        {
+           {
             "id": 1,
             "type": "ongoing",
             "icon": "fas fa-graduation-cap",
@@ -114,7 +114,7 @@ async function loadCertifications() {
         const educationGrid = document.getElementById('educationGrid');
         
         if (!educationGrid) {
-            console.error('Education grid element not found');
+            console.error('Education grid element not found!');
             return;
         }
         
@@ -131,66 +131,27 @@ async function loadCertifications() {
             data = await response.json();
             console.log('Loaded certifications from JSON file');
         } catch (fetchError) {
-            console.warn('Could not load from JSON file, using fallback data:', fetchError.message);
+            console.warn('Could not load from JSON file, using fallback data:', fetchError);
             data = fallbackCertifications;
         }
         
         // Clear any existing content
         educationGrid.innerHTML = '';
         
-        // Helper function to parse date for sorting
-        function parseDate(dateStr) {
-            // Handle "2025 - Present" format
-            if (dateStr.includes('Present')) {
-                const year = parseInt(dateStr.split(' - ')[0]);
-                return new Date(year, 11, 31);
-            }
-            // Handle "2021 - 2025" format
-            if (dateStr.includes(' - ')) {
-                const endYear = parseInt(dateStr.split(' - ')[1]);
-                return new Date(endYear, 11, 31);
-            }
-            // Handle single year "2024"
-            return new Date(parseInt(dateStr), 11, 31);
-        }
-        
-        // Sort certifications: ongoing first, then by end date (newest first)
-        const sortedCerts = data.certifications.sort((a, b) => {
-            // Prioritize ongoing studies
-            if (a.type === 'ongoing' && b.type !== 'ongoing') return -1;
-            if (b.type === 'ongoing' && a.type !== 'ongoing') return 1;
-            
-            // Then by end date (newest first)
-            const dateA = parseDate(a.date);
-            const dateB = parseDate(b.date);
-            return dateB - dateA;
-        });
-        
-        sortedCerts.forEach(cert => {
+        data.certifications.forEach(cert => {
             const certCard = document.createElement('div');
             certCard.className = 'education-card fade-in';
             certCard.setAttribute('data-cert-id', cert.id);
-            
-            // Add type-specific class for styling
-            if (cert.type === 'ongoing') {
-                certCard.classList.add('ongoing-card');
-            }
             
             certCard.innerHTML = `
                 <div class="education-icon">
                     <i class="${cert.icon}"></i>
                 </div>
-                <div class="education-date">
-                    ${cert.date}
-                    ${cert.type === 'ongoing' ? '<span class="ongoing-badge">Current</span>' : ''}
-                </div>
+                <div class="education-date">${cert.date}</div>
                 <h3>${cert.name}</h3>
                 <h4>${cert.institution}</h4>
                 <p>${cert.description}</p>
-                <div class="cert-badge" data-cert-id="${cert.id}">
-                    ${cert.badge}
-                    ${cert.type === 'ongoing' ? '<i class="fas fa-sync-alt ongoing-icon"></i>' : ''}
-                </div>
+                <div class="cert-badge" data-cert-id="${cert.id}">${cert.badge}</div>
             `;
             
             educationGrid.appendChild(certCard);
@@ -212,7 +173,7 @@ async function loadCertifications() {
                 if (cardTop < window.innerHeight - cardVisible) {
                     setTimeout(() => {
                         card.classList.add('visible');
-                    }, index * 150);
+                    }, index * 200);
                 }
             });
             
@@ -229,9 +190,6 @@ async function loadCertifications() {
                     <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 20px;"></i>
                     <h3>Error Loading Certifications</h3>
                     <p>${error.message}</p>
-                    <button onclick="location.reload()" style="margin-top: 20px; padding: 10px 20px; background: rgba(100, 255, 218, 0.1); color: #64ffda; border: 1px solid rgba(100, 255, 218, 0.3); border-radius: 5px; cursor: pointer;">
-                        <i class="fas fa-redo"></i> Retry Loading
-                    </button>
                 </div>
             `;
         }
@@ -280,35 +238,6 @@ function attachCertificationListeners() {
             openCertificationModal(certId);
         });
     });
-}
-
-// Initialize education animations
-function initEducationAnimations() {
-    const educationCards = document.querySelectorAll('.education-card');
-    educationCards.forEach((card, index) => {
-        const cardTop = card.getBoundingClientRect().top;
-        const cardVisible = 100;
-        
-        if (cardTop < window.innerHeight - cardVisible) {
-            setTimeout(() => {
-                card.classList.add('visible');
-            }, index * 150);
-        }
-    });
-}
-
-// Show error function
-function showError(error) {
-    const educationGrid = document.getElementById('educationGrid');
-    if (educationGrid) {
-        educationGrid.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #8892b0; grid-column: 1/-1;">
-                <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 20px;"></i>
-                <h3>Error Loading Certifications</h3>
-                <p>${error.message}</p>
-            </div>
-        `;
-    }
 }
 
 // Load certifications data and set up modal
