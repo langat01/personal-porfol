@@ -1,7 +1,7 @@
 // Fallback certifications data
 const fallbackCertifications = {
     "certifications": [
-           {
+        {
             "id": 1,
             "type": "ongoing",
             "icon": "fas fa-graduation-cap",
@@ -70,7 +70,7 @@ const fallbackCertifications = {
             "id": 6,
             "type": "certification",
             "icon": "fas fa-brain",
-            "date": "2024", // Changed from 2026 to 2024
+            "date": "2024",
             "name": "Machine Learning for Data Science",
             "institution": "IBM",
             "description": "IBM certification covering machine learning algorithms, model development, and implementation for data science applications.",
@@ -108,9 +108,18 @@ const fallbackCertifications = {
     ]
 };
 
+// Certification data loaded from JSON
+let certificationsData = {};
+
+// Certification Modal elements
+let certModal;
+let closeCertModal;
+
 // Load certifications data and render education cards
 async function loadCertifications() {
     try {
+        console.log('loadCertifications function started');
+        
         const educationGrid = document.getElementById('educationGrid');
         
         if (!educationGrid) {
@@ -122,6 +131,7 @@ async function loadCertifications() {
         
         // Try to load from JSON file first
         try {
+            console.log('Attempting to load from data/certifications.json');
             const response = await fetch('data/certifications.json');
             
             if (!response.ok) {
@@ -129,14 +139,16 @@ async function loadCertifications() {
             }
             
             data = await response.json();
-            console.log('Loaded certifications from JSON file');
+            console.log('Successfully loaded certifications from JSON file:', data);
         } catch (fetchError) {
-            console.warn('Could not load from JSON file, using fallback data:', fetchError);
+            console.warn('Could not load from JSON file, using fallback data:', fetchError.message);
             data = fallbackCertifications;
         }
         
         // Clear any existing content
         educationGrid.innerHTML = '';
+        
+        console.log('Rendering certifications:', data.certifications.length);
         
         data.certifications.forEach(cert => {
             const certCard = document.createElement('div');
@@ -162,9 +174,12 @@ async function loadCertifications() {
             certificationsData[cert.id] = cert;
         });
         
+        console.log('Certifications data stored for modal:', Object.keys(certificationsData).length);
+        
         // Re-initialize scroll animations for newly added cards
         setTimeout(() => {
             const newEducationCards = document.querySelectorAll('.education-card');
+            console.log('Education cards created:', newEducationCards.length);
             
             newEducationCards.forEach((card, index) => {
                 const cardTop = card.getBoundingClientRect().top;
@@ -182,7 +197,7 @@ async function loadCertifications() {
         }, 100);
         
     } catch (error) {
-        console.error('Error loading certifications:', error);
+        console.error('Error in loadCertifications:', error);
         const educationGrid = document.getElementById('educationGrid');
         if (educationGrid) {
             educationGrid.innerHTML = `
@@ -196,15 +211,9 @@ async function loadCertifications() {
     }
 }
 
-// Certification Modal Functionality
-const certModal = document.getElementById('certModal');
-const closeCertModal = document.getElementById('closeCertModal');
-
-// Certification data loaded from JSON
-let certificationsData = {};
-
 // Open certification modal
 function openCertificationModal(certId) {
+    console.log('Opening certification modal for ID:', certId);
     const cert = certificationsData[certId];
     
     if (cert) {
@@ -219,6 +228,8 @@ function openCertificationModal(certId) {
         
         certModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+    } else {
+        console.error('Certificate not found for ID:', certId);
     }
 }
 
@@ -230,7 +241,9 @@ function closeCertificationModal() {
 
 // Attach event listeners to certification badges
 function attachCertificationListeners() {
+    console.log('Attaching certification listeners');
     const certBadges = document.querySelectorAll('.cert-badge');
+    console.log('Found certification badges:', certBadges.length);
     
     certBadges.forEach(badge => {
         badge.addEventListener('click', function() {
@@ -240,9 +253,20 @@ function attachCertificationListeners() {
     });
 }
 
-// Load certifications data and set up modal
+// Initialize certifications when DOM is loaded
 function initializeCertifications() {
     try {
+        console.log('Initializing certifications...');
+        
+        // Get modal elements
+        certModal = document.getElementById('certModal');
+        closeCertModal = document.getElementById('closeCertModal');
+        
+        console.log('Modal elements:', {
+            certModal: !!certModal,
+            closeCertModal: !!closeCertModal
+        });
+        
         // Render certifications
         loadCertifications();
         
@@ -266,14 +290,12 @@ function initializeCertifications() {
             }
         });
         
+        console.log('Certifications initialized successfully');
+        
     } catch (error) {
         console.error('Error initializing certifications:', error);
     }
 }
 
-// Initialize certifications when DOM is loaded
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initializeCertifications);
-} else {
-    initializeCertifications();
-}
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', initializeCertifications);
