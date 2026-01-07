@@ -1,9 +1,90 @@
+// Fallback certifications data
+const fallbackCertifications = {
+    "certifications": [
+        {
+            "id": 1,
+            "type": "degree",
+            "icon": "fas fa-graduation-cap",
+            "date": "2021 - 2024",
+            "name": "MSc Data Science",
+            "institution": "University of Nairobi",
+            "description": "Specialized in Machine Learning, Statistical Analysis, and Big Data Technologies. Graduated with Distinction.",
+            "badge": "GPA: 3.9/4.0",
+            "credentialId": "UNAI-2024-MSC-DS",
+            "url": "#",
+            "skills": "Machine Learning, Statistical Analysis, Big Data, Python, R, SQL"
+        },
+        {
+            "id": 2,
+            "type": "degree",
+            "icon": "fas fa-graduation-cap",
+            "date": "2017 - 2021",
+            "name": "BSc Computer Science",
+            "institution": "Kenyatta University",
+            "description": "Major in Artificial Intelligence and Data Mining. Received Dean's Honors for Academic Excellence.",
+            "badge": "First Class Honors",
+            "credentialId": "KU-CS-2021-BSC",
+            "url": "#",
+            "skills": "Artificial Intelligence, Data Mining, Algorithms, Software Engineering"
+        },
+        {
+            "id": 3,
+            "type": "certification",
+            "icon": "fas fa-certificate",
+            "date": "2023",
+            "name": "Google Data Analytics Certificate",
+            "institution": "Google Career Certificates",
+            "description": "Professional certification covering the entire data analysis process including data cleaning, analysis, visualization, and R programming.",
+            "badge": "Credential ID: G-DAC-7890123",
+            "credentialId": "G-DAC-7890123",
+            "url": "#",
+            "skills": "Data Cleaning, Analysis, Visualization, R Programming, SQL, Tableau"
+        },
+        {
+            "id": 4,
+            "type": "certification",
+            "icon": "fas fa-certificate",
+            "date": "2022",
+            "name": "Azure Data Scientist Associate",
+            "institution": "Microsoft",
+            "description": "Certification demonstrating expertise in implementing machine learning models on Azure and managing data science workflows.",
+            "badge": "Credential ID: DP-100",
+            "credentialId": "DP-100",
+            "url": "#",
+            "skills": "Azure Machine Learning, ML Operations, Model Deployment, Cloud AI"
+        }
+    ]
+};
+
 // Load certifications data and render education cards
 async function loadCertifications() {
     try {
-        const response = await fetch('data/certifications.json');
-        const data = await response.json();
         const educationGrid = document.getElementById('educationGrid');
+        
+        if (!educationGrid) {
+            console.error('Education grid element not found!');
+            return;
+        }
+        
+        let data;
+        
+        // Try to load from JSON file first
+        try {
+            const response = await fetch('data/certifications.json');
+            
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            
+            data = await response.json();
+            console.log('Loaded certifications from JSON file');
+        } catch (fetchError) {
+            console.warn('Could not load from JSON file, using fallback data:', fetchError);
+            data = fallbackCertifications;
+        }
+        
+        // Clear any existing content
+        educationGrid.innerHTML = '';
         
         data.certifications.forEach(cert => {
             const certCard = document.createElement('div');
@@ -24,9 +105,15 @@ async function loadCertifications() {
             educationGrid.appendChild(certCard);
         });
         
+        // Initialize certifications data object for modal
+        data.certifications.forEach(cert => {
+            certificationsData[cert.id] = cert;
+        });
+        
         // Re-initialize scroll animations for newly added cards
         setTimeout(() => {
             const newEducationCards = document.querySelectorAll('.education-card');
+            
             newEducationCards.forEach((card, index) => {
                 const cardTop = card.getBoundingClientRect().top;
                 const cardVisible = 100;
@@ -44,12 +131,16 @@ async function loadCertifications() {
         
     } catch (error) {
         console.error('Error loading certifications:', error);
-        document.getElementById('educationGrid').innerHTML = `
-            <div style="text-align: center; padding: 40px; color: #8892b0;">
-                <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 20px;"></i>
-                <p>Unable to load certifications. Please check your connection and try again.</p>
-            </div>
-        `;
+        const educationGrid = document.getElementById('educationGrid');
+        if (educationGrid) {
+            educationGrid.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #8892b0; grid-column: 1/-1;">
+                    <i class="fas fa-exclamation-circle" style="font-size: 48px; margin-bottom: 20px;"></i>
+                    <h3>Error Loading Certifications</h3>
+                    <p>${error.message}</p>
+                </div>
+            `;
+        }
     }
 }
 
@@ -98,32 +189,27 @@ function attachCertificationListeners() {
 }
 
 // Load certifications data and set up modal
-async function initializeCertifications() {
+function initializeCertifications() {
     try {
-        // Load certifications data
-        const response = await fetch('data/certifications.json');
-        const data = await response.json();
-        
-        // Convert array to object with id as key
-        data.certifications.forEach(cert => {
-            certificationsData[cert.id] = cert;
-        });
-        
         // Render certifications
-        await loadCertifications();
+        loadCertifications();
         
         // Set up modal close events
-        closeCertModal.addEventListener('click', closeCertificationModal);
+        if (closeCertModal) {
+            closeCertModal.addEventListener('click', closeCertificationModal);
+        }
         
-        certModal.addEventListener('click', function(e) {
-            if (e.target === certModal) {
-                closeCertificationModal();
-            }
-        });
+        if (certModal) {
+            certModal.addEventListener('click', function(e) {
+                if (e.target === certModal) {
+                    closeCertificationModal();
+                }
+            });
+        }
         
         // Close modal with Escape key
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && certModal.classList.contains('active')) {
+            if (e.key === 'Escape' && certModal && certModal.classList.contains('active')) {
                 closeCertificationModal();
             }
         });
@@ -134,4 +220,8 @@ async function initializeCertifications() {
 }
 
 // Initialize certifications when DOM is loaded
-document.addEventListener('DOMContentLoaded', initializeCertifications);
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeCertifications);
+} else {
+    initializeCertifications();
+}
