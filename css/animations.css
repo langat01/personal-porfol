@@ -4,7 +4,7 @@
         transform: translateX(0);
     }
     100% {
-        transform: translateX(-50%); /* Changed from -30% to -50% */
+        transform: translateX(-100%);
     }
 }
 
