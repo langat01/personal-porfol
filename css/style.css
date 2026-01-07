@@ -52,7 +52,7 @@ body {
 .running-text {
     display: inline-block;
     white-space: nowrap;
-    animation: runText 10s linear infinite;
+    animation: runText 25s linear infinite;
     font-size: 0.9rem;
     color: #64ffda;
     font-weight: 500;
