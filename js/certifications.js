@@ -51,58 +51,7 @@
             "credentialId": "CISCO-DA-ESSENTIALS",
             "url": "#",
             "skills": "Data Analysis, Statistical Methods, Business Intelligence"
-        },
-        {
-            "id": 5,
-            "type": "certification",
-            "icon": "fas fa-chart-bar",
-            "date": "2022",
-            "name": "STATA & SPSS Certification",
-            "institution": "KEPSA Research Center",
-            "description": "Professional certification in statistical software packages STATA and SPSS for advanced data analysis and research applications.",
-            "badge": "Professional Certification",
-            "credentialId": "KEPSA-STAT-SPSS",
-            "url": "#",
-            "skills": "STATA, SPSS, Statistical Software, Research Analysis"
-        },
-        {
-            "id": 6,
-            "type": "certification",
-            "icon": "fas fa-brain",
-            "date": "2024", // Changed from 2026 to 2024
-            "name": "Machine Learning for Data Science",
-            "institution": "IBM",
-            "description": "IBM certification covering machine learning algorithms, model development, and implementation for data science applications.",
-            "badge": "IBM Professional Certificate",
-            "credentialId": "IBM-ML-DS",
-            "url": "#",
-            "skills": "Machine Learning, Predictive Modeling, AI Algorithms"
-        },
-        {
-            "id": 7,
-            "type": "certification",
-            "icon": "fas fa-robot",
-            "date": "2024",
-            "name": "AI Fundamentals",
-            "institution": "IBM",
-            "description": "Foundational certification in Artificial Intelligence covering AI concepts, applications, and ethical considerations.",
-            "badge": "IBM Professional Certificate",
-            "credentialId": "IBM-AI-FUNDAMENTALS",
-            "url": "#",
-            "skills": "Artificial Intelligence, AI Concepts, Ethical AI"
-        },
-        {
-            "id": 8,
-            "type": "certification",
-            "icon": "fas fa-chart-line",
-            "date": "2023",
-            "name": "AI for Data Analysis Interview",
-            "institution": "Micro1",
-            "description": "Specialized certification in using AI tools and techniques for data analysis, with focus on interview preparation and practical applications.",
-            "badge": "Micro1 Certified",
-            "credentialId": "MICRO1-AI-DA",
-            "url": "#",
-            "skills": "AI Tools, Data Analysis, Interview Preparation"
         }
+       
     ]
 }
