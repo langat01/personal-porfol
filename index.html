@@ -142,43 +142,261 @@
         </div>
     </section>
 
-    <!-- Education & Certifications Section -->
-    <section class="education" id="education">
-        <div class="container">
-            <h2 class="section-title fade-in">Education & Certifications</h2>
-            <p class="section-subtitle fade-in">My academic background and professional certifications in data science</p>
-            
-            <div class="education-grid" id="educationGrid">
-                <!-- Education cards will be dynamically loaded from certifications.json -->
-            </div>
-        </div>
-    </section>
-
-    <!-- Certification Modal -->
-    <div class="cert-modal" id="certModal">
-        <div class="cert-modal-content">
-            <div class="cert-modal-header">
-                <h3 id="certModalTitle">Certificate Details</h3>
-                <button class="close-modal" id="closeCertModal">&times;</button>
-            </div>
-            <div class="cert-modal-body">
-                <div class="cert-details">
-                    <div class="cert-image">
-                        <i class="fas fa-certificate"></i>
+   <!-- Education & Certifications Section -->
+<section class="education" id="education">
+    <div class="container">
+        <h2 class="section-title fade-in">Education & Certifications</h2>
+        <p class="section-subtitle fade-in">My academic background and professional certifications in data science</p>
+        
+        <div class="education-grid" id="educationGrid">
+            <!-- Card 1: MSc Financial Engineering -->
+            <div class="education-card fade-in" data-type="ongoing">
+                <div class="edu-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge ongoing">In Progress</span>
+                        <span class="edu-date">2025 - Present</span>
                     </div>
-                    <div class="cert-info">
-                        <h4 id="certName">Certificate Name</h4>
-                        <p><strong>Issuing Organization:</strong> <span id="certOrg">Organization Name</span></p>
-                        <p><strong>Issue Date:</strong> <span id="certDate">Month Year</span></p>
-                        <p><strong>Credential ID:</strong> <span id="certId">ABC123XYZ</span></p>
-                        <p><strong>Credential URL:</strong> <a href="#" id="certUrl" class="contact-link" target="_blank">View on issuer's website</a></p>
-                        <p><strong>Skills:</strong> <span id="certSkills">Data Analysis, Machine Learning, Statistics</span></p>
-                        <p id="certDescription">Detailed description of the certification and what it represents.</p>
+                    <h3 class="edu-title">MSc Financial Engineering</h3>
+                    <p class="edu-institution">WorldQuant University</p>
+                    <p class="edu-description">Currently enrolled in Master of Science in Financial Engineering program, focusing on quantitative finance, risk management, and algorithmic trading.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">Quantitative Finance</span>
+                        <span class="skill-tag">Data Science in Finance</span>
+                        <span class="skill-tag">Risk Management</span>
+                        <span class="skill-tag">Algorithmic Trading</span>
+                        <span class="skill-tag">Financial Modeling</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="1">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                        <a href="https://www.wqu.edu" class="btn-tertiary" target="_blank" rel="noopener">
+                            <i class="fas fa-external-link-alt"></i> Verify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: BSc Applied Statistics -->
+            <div class="education-card fade-in" data-type="degree">
+                <div class="edu-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge degree">Second Class Honors (Upper Division)</span>
+                        <span class="edu-date">2021 - 2025</span>
+                    </div>
+                    <h3 class="edu-title">BSc Applied Statistics with Programming</h3>
+                    <p class="edu-institution">Murang'a University of Technology</p>
+                    <p class="edu-description">Bachelor of Science in Applied Statistics with Programming. Specialized in statistical analysis, data science, and programming applications for real-world problems.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">Statistical Analysis</span>
+                        <span class="skill-tag">Data Science</span>
+                        <span class="skill-tag">Programming</span>
+                        <span class="skill-tag">Research Methods</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="2">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                        <a href="https://www.mut.ac.ke" class="btn-tertiary" target="_blank" rel="noopener">
+                            <i class="fas fa-external-link-alt"></i> Verify
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3: Introduction to Data Science -->
+            <div class="education-card fade-in" data-type="certification">
+                <div class="edu-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge certification">Cisco Certified</span>
+                        <span class="edu-date">2024</span>
+                    </div>
+                    <h3 class="edu-title">Introduction to Data Science</h3>
+                    <p class="edu-institution">Cisco Networking Academy</p>
+                    <p class="edu-description">Fundamental concepts of data science including data collection, cleaning, analysis, and visualization techniques.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">Data Science Fundamentals</span>
+                        <span class="skill-tag">Data Cleaning</span>
+                        <span class="skill-tag">Basic Analysis</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="3">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4: Data Analysis Essentials -->
+            <div class="education-card fade-in" data-type="certification">
+                <div class="edu-icon">
+                    <i class="fas fa-certificate"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge certification">Cisco Certified</span>
+                        <span class="edu-date">2023</span>
+                    </div>
+                    <h3 class="edu-title">Data Analysis Essentials</h3>
+                    <p class="edu-institution">Cisco Networking Academy</p>
+                    <p class="edu-description">Comprehensive data analysis training covering statistical methods, data visualization, and analytical tools for business intelligence.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Statistical Methods</span>
+                        <span class="skill-tag">Business Intelligence</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="4">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5: STATA & SPSS Certification -->
+            <div class="education-card fade-in" data-type="certification">
+                <div class="edu-icon">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge certification">Professional Certification</span>
+                        <span class="edu-date">2022</span>
+                    </div>
+                    <h3 class="edu-title">STATA & SPSS Certification</h3>
+                    <p class="edu-institution">KEPSA Research Center</p>
+                    <p class="edu-description">Professional certification in statistical software packages STATA and SPSS for advanced data analysis and research applications.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">STATA</span>
+                        <span class="skill-tag">SPSS</span>
+                        <span class="skill-tag">Statistical Software</span>
+                        <span class="skill-tag">Research Analysis</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="5">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6: Machine Learning for Data Science -->
+            <div class="education-card fade-in" data-type="certification">
+                <div class="edu-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge certification">IBM Professional Certificate</span>
+                        <span class="edu-date">2024</span>
+                    </div>
+                    <h3 class="edu-title">Machine Learning for Data Science</h3>
+                    <p class="edu-institution">IBM</p>
+                    <p class="edu-description">IBM certification covering machine learning algorithms, model development, and implementation for data science applications.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">Predictive Modeling</span>
+                        <span class="skill-tag">AI Algorithms</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="6">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 7: AI Fundamentals -->
+            <div class="education-card fade-in" data-type="certification">
+                <div class="edu-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge certification">IBM Professional Certificate</span>
+                        <span class="edu-date">2024</span>
+                    </div>
+                    <h3 class="edu-title">AI Fundamentals</h3>
+                    <p class="edu-institution">IBM</p>
+                    <p class="edu-description">Foundational certification in Artificial Intelligence covering AI concepts, applications, and ethical considerations.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">Artificial Intelligence</span>
+                        <span class="skill-tag">AI Concepts</span>
+                        <span class="skill-tag">Ethical AI</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="7">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 8: AI for Data Analysis Interview -->
+            <div class="education-card fade-in" data-type="certification">
+                <div class="edu-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="edu-content">
+                    <div class="edu-header">
+                        <span class="cert-badge certification">Micro1 Certified</span>
+                        <span class="edu-date">2023</span>
+                    </div>
+                    <h3 class="edu-title">AI for Data Analysis Interview</h3>
+                    <p class="edu-institution">Micro1</p>
+                    <p class="edu-description">Specialized certification in using AI tools and techniques for data analysis, with focus on interview preparation and practical applications.</p>
+                    <div class="edu-skills">
+                        <span class="skill-tag">AI Tools</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">Interview Preparation</span>
+                    </div>
+                    <div class="edu-actions">
+                        <button class="btn-secondary view-details" data-id="8">
+                            <i class="fas fa-info-circle"></i> View Details
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</section>
+
+<!-- Certification Modal -->
+<div class="cert-modal" id="certModal">
+    <div class="cert-modal-content">
+        <div class="cert-modal-header">
+            <h3 id="certModalTitle">Certificate Details</h3>
+            <button class="close-modal" id="closeCertModal">&times;</button>
+        </div>
+        <div class="cert-modal-body">
+            <div class="cert-details">
+                <div class="cert-image">
+                    <i class="fas fa-certificate" id="certIcon"></i>
+                </div>
+                <div class="cert-info">
+                    <h4 id="certName">Certificate Name</h4>
+                    <p><strong>Institution:</strong> <span id="certOrg">Institution Name</span></p>
+                    <p><strong>Date:</strong> <span id="certDate">Month Year</span></p>
+                    <p><strong>Credential ID:</strong> <span id="certId">ABC123XYZ</span></p>
+                    <p><strong>Skills:</strong> <span id="certSkills">Data Analysis, Machine Learning, Statistics</span></p>
+                    <p><strong>Description:</strong></p>
+                    <p id="certDescription">Detailed description of the certification and what it represents.</p>
+                    <p><strong>Verify Credential:</strong> <a href="#" id="certUrl" class="contact-link" target="_blank" rel="noopener">View on issuer's website</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
     <!-- Experience Section -->
     <section class="experience" id="experience">
