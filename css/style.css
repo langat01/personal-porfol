@@ -126,6 +126,35 @@ body {
 .nav-links a:hover:after {
     width: 100%;
 }
+.profile-img {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #64ffda;
+    box-shadow: 0 0 30px rgba(100, 255, 218, 0.4);
+    transition: all 0.3s ease;
+}
+
+.profile-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(100, 255, 218, 0.6);
+}
+
+.profile-img-placeholder {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+/* Optional: Add a subtle animation */
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.profile-img {
+    animation: float 6s ease-in-out infinite;
+}
 
 .resume-btn {
     background: transparent;
