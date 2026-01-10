@@ -1,14 +1,23 @@
-/* Animations */
-@keyframes runText {
-    0% {
-        transform: translateX(0);
+/* ===== ANIMATIONS ===== */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
     }
-    100% {
-        transform: translateX(-50%);
+    50% {
+        transform: translateY(-10px);
     }
 }
 
-@keyframes fadeInLeft {
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+@keyframes slideInLeft {
     from {
         opacity: 0;
         transform: translateX(-50px);
@@ -19,7 +28,7 @@
     }
 }
 
-@keyframes fadeInRight {
+@keyframes slideInRight {
     from {
         opacity: 0;
         transform: translateX(50px);
@@ -30,65 +39,145 @@
     }
 }
 
-@keyframes projectCardEntrance {
-    0% {
-        transform: scale(0.95) translateY(30px);
+@keyframes zoomIn {
+    from {
         opacity: 0;
+        transform: scale(0.9);
     }
-    100% {
-        transform: scale(1) translateY(0);
+    to {
         opacity: 1;
+        transform: scale(1);
     }
 }
 
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+/* ===== ANIMATION UTILITY CLASSES ===== */
+.float-animation {
+    animation: float 3s ease-in-out infinite;
 }
 
-/* Scroll animations */
-.fade-in {
+.pulse-animation {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.6s ease-out;
+}
+
+.zoom-in {
+    animation: zoomIn 0.6s ease-out;
+}
+
+/* ===== SCROLL ANIMATIONS ===== */
+.reveal-on-scroll {
     opacity: 0;
     transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
+    transition: all 0.6s ease;
 }
 
-.fade-in.visible {
+.reveal-on-scroll.revealed {
     opacity: 1;
     transform: translateY(0);
 }
 
-.education-card {
-    transform: translateY(50px);
-    opacity: 0;
-    transition: transform 0.8s ease, opacity 0.8s ease;
+/* ===== HOVER EFFECTS ===== */
+.hover-grow {
+    transition: transform 0.3s ease;
 }
 
-.education-card.visible {
-    transform: translateY(0);
-    opacity: 1;
+.hover-grow:hover {
+    transform: scale(1.05);
 }
 
-.project-card {
-    transform: scale(0.95);
-    opacity: 0;
-    animation: projectCardEntrance 0.6s ease forwards;
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.project-card.visible {
-    transform: scale(1);
-    opacity: 1;
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
 }
 
-.cert-modal.active .cert-modal-content {
-    transform: translateY(0);
+/* ===== GLOW EFFECTS ===== */
+.glow {
+    transition: box-shadow 0.3s ease;
 }
 
-.project-modal.active .project-modal-content {
-    transform: translateY(0);
+.glow:hover {
+    box-shadow: 0 0 20px rgba(222, 255, 212, 0.3);
 }
 
-.tab-content.active {
-    display: block;
-    animation: fadeIn 0.5s ease;
+.accent-glow:hover {
+    box-shadow: 0 0 20px rgba(6, 6, 212, 0.3);
+}
+
+/* ===== LOADING ANIMATIONS ===== */
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--glass-border);
+    border-top: 4px solid var(--teal);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* ===== PAGE TRANSITIONS ===== */
+.page-transition {
+    animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===== TEXT ANIMATIONS ===== */
+.typewriter {
+    overflow: hidden;
+    border-right: 3px solid var(--teal);
+    white-space: nowrap;
+    animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: var(--teal) }
+}
+
+/* ===== BACKGROUND ANIMATIONS ===== */
+.animated-bg {
+    background: linear-gradient(-45deg, var(--primary), var(--secondary), var(--accent), var(--teal));
+    background-size: 400% 400%;
+    animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
 }
